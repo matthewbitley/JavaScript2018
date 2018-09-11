@@ -12,6 +12,7 @@ dog = false;
 function isPalindrome(str) {
   
   str.split('').reverse().join('') === str
+  
   // Stack Overflow Answer
   /*var len = str.length;
     for ( var i = 0; i < Math.floor(len/2); i++ ) {
