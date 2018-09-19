@@ -6,7 +6,21 @@
  * maxChar("aaaabc"); // a
  */
 
-function maxChars(string) {}
+function maxChars(string) {
+  var freq = {};
+    for (var i=0; i<string.length;i++) {
+        var char = string[i];
+        if (freq[char]) {
+           freq[char]++;
+        } else {
+           freq[char] = 1;
+        }
+    }
+
+  return freq;
+}
+
+console.log(maxChars("Hello World"));
 
 module.exports = {
   maxChars
