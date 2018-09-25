@@ -11,7 +11,7 @@
      callback(arr[i],i,arr);
    }
  }
- forEach(arr,console.log);
+forEach(arr,console.log);
 
 /*
 * You must use ForEach

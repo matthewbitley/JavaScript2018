@@ -5,7 +5,21 @@
  * @param {function} callback
  * @returns {array} new array
  */
-function map(arr, callback) {}
+
+var arr = [1,2,3];
+function map(arr, callback) {
+  newArr = [];
+  arr.forEach(function(item, index, array) {
+    //newArr.push(item, index, array);
+    newArr.push(item);
+    //callback(item, index, array);
+  });
+  return newArr;
+}
+
+console.log(map(arr, function(item, index, array){
+     return item * 2;
+}));
 
 /**
  * Multiplies each vvalue in an array by two

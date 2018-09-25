@@ -1,3 +1,18 @@
+<!-- You will have to make use of closure to solve this problem.
+/ start the game by passing in the amount of tries a player can attempt the game.
+var game = guessingGame(5)
+game(1) // "You're too low!"
+game(8) // "You're too high!"
+game(5) // "You're too low!"
+game(7) // "You got it!"
+game(1) // "You are all done playing!"
+
+var game2 = guessingGame(3)
+game2(5) // "You're too low!"
+game2(3) // "You're too low!"
+game2(1) // "No more guesses the answer was 0"
+game2(1) // "You are all done playing!" -->
+
 <!DOCTYPE html>
 <html>
 
@@ -8,10 +23,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
 </head>
+<style>
+    .form {
+        display: flex;
+    margin: 0 auto;
+    text-align: center;
+    max-width: 30%;
+    }
+</style>
 
 <body>
-    <div class="container">
-        <form class="form-inline">
+    <div class="container" style="text-align: center">
+        <h2>Guess A Number Between 1 and 10.</h2>
+        <h5>You only get <span id="guesses">0</span> attempts. Choose wisely!</h5>
+        <form class="form">
             <input type="text" id="guessInput" class="form-control">
             <button type="submit" class="btn btn-primary">Guess!</button>
         </form>
@@ -21,27 +46,63 @@
             /**
              * You can also work on this in real time with JSBin
              * @see https://jsbin.com/jokumurubo/1/edit?js,console,output
+             * 
+             * Create a game where the user most guess must guess the number.
+             * You will have to make use of closure to solve this problem.
+             * 
+             * @example
+             * var game = guessingGame(5)
+             * game(1) // "You're too low!"
+             * game(8) // "You're too high!"
+             * game(5) // "You're too low!"
+             * game(7) // "You got it!"
+             * game(1) // "You are all done playing!"
+             *  
+             * @example
+             *  var game2 = guessingGame(3)
+             *  game2(5) // "You're too low!"
+             *  game2(3) // "You're too low!"
+             *  game2(1) // "No more guesses the answer was 0"
+             *  game2(1) // "You are all done playing!"
+             * 
+             * @param {number} numberOfTries the number of guesses the user gets before they lose
              */
+             var numberOfTries = 0;
+             var maxTries = 3;
+var answer = Math.floor(Math.random() * 10 + 1);
+var form = document.forms[0];
+var input = document.getElementById('guessInput');
+document.getElementById("guesses").innerHTML = maxTries;
 
-            function GuessingGame(numberOfTries) {
-                var answer = 3;
-                var attemptedTries = 0;
-                var result;
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  var userInput = parseInt(input.value);
+if ( userInput === answer) {
+  alert("Congratulations! The number was " + answer +". You win!");
+}
+else if (userInput > answer ){
+  numberOfTries++;
+  var attemptLeft = maxTries - numberOfTries;
+  alert("Nope, it's not "+ userInput +". Try a lower number. Number of attempts left: "+ attemptLeft +"");
+  if (numberOfTries === maxTries) {
+    alert("Game Over! The answer was "+ answer +"");
+    return;
+  }
+}
+else {
+  numberOfTries++;
+  var attemptLeft = maxTries - numberOfTries;
+  alert("Nope, it's not "+ userInput +". Try a higher number. Number of attempts left: "+ attemptLeft +"");
+  if (numberOfTries === maxTries) {
+    alert("Game Over! The answer was "+ answer +".");
+    return;
+  }
+}
+});
 
-                // return something here
-            }
-            var guess = GuessingGame(3);
-
-            var form = document.forms[0];
-            var input = document.getElementById('guessInput')
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                var userInput = parseInt(input.value);
-                var response = guess(userInput);
-                console.log(response);
-            });
         })()
     </script>
 </body>
 
 </html>
+
