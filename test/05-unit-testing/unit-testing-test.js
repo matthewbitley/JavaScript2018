@@ -15,7 +15,7 @@ const { expect } = require("chai");
 const {
   add,
   subtract,
-  // Include multiply here
+  multiply,
   findAdults
 } = require("../../exercises/05-unit-testing/unit-testing");
 
@@ -28,18 +28,22 @@ describe("unit testing exercise", function() {
   });
 
   describe("subtract", function() {
-    // Write a test for subtract here
+    it("should subtract two numbers", function() {
+      var subsum = subtract(2, 3);
+      expect(subsum).to.equal(-1);
+    });
   });
 
   describe("multiply", function() {
-    // Write the function multiply in `exercises/05-unit-testing/unit-testing-code.js`
-    // Export / import the multiply function
-    // Write a test for multiply here
+    it("should multiply two numbers", function() {
+      var mulsum = multiply(2, 3);
+      expect(mulsum).to.equal(6);
+    });
   });
 
   describe("findAdults", function() {
     // Remove the `.skip` when you are ready to write this test
-    it.skip("will find, in a multidimensional array, all the people older than 18", function() {
+    it("will find, in a multidimensional array, all the people older than 18", function() {
       // Complete the unit test for findAdults here
       // Hint: Arrays are passed by reference, so you will need to call on a test that deeply compares values
       // @see https://www.chaijs.com/api/bdd/
@@ -48,10 +52,11 @@ describe("unit testing exercise", function() {
         { name: "Aiden", age: 10 },
         { name: "Chloe", age: 16 }
       ];
+      expect(people).to.deep.include({name: "Janet", age: 43});
     });
 
     // Remove the `.skip` when you are ready to write this test
-    it.skip("will return an empty array if no adults are found", function() {
+    it("will return an empty array if no adults are found", function() {
       // Complete the unit test for findAdults here, where you use a different assertion than `.equal()`
       // @see https://www.chaijs.com/api/bdd/
       var people = [
@@ -59,6 +64,7 @@ describe("unit testing exercise", function() {
         { name: "Emma", age: 17 },
         { name: "Ethan", age: 8 }
       ];
+      expect(people).to.not.include({name: "Emma", age: 17});
     });
   });
 });
