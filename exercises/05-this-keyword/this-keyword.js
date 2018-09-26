@@ -8,7 +8,11 @@
 var car = {
   brand: "Nissan",
   getBrand: function() {
+<<<<<<< HEAD
     return car.brand;
+=======
+    return this.brand;
+>>>>>>> 6ea895904a829614ed1e525a11023455cbd61cb7
   }
 };
 var getCarBrand = car.getBrand;
@@ -24,7 +28,11 @@ var motorcycle = {
   brand: "Harley Davidson",
   getMotorcyleBrand: function() {
     var closure = function() {
+<<<<<<< HEAD
       return motorcycle.brand;
+=======
+      return this.brand;
+>>>>>>> 6ea895904a829614ed1e525a11023455cbd61cb7
     };
     return closure();
   }
