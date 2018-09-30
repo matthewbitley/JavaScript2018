@@ -6,9 +6,11 @@
  * @param {number} b
  * @returns {number} the sum of `a` plus `b`
  */
-function add(a, b) {
+/* function add(a, b) {
   return a + b;
-}
+} */
+
+let add = (a,b) => a + b;
 
 /**
  * Refactor the following to use ES6 arrow syntax.
@@ -17,7 +19,7 @@ function add(a, b) {
  * @returns {array} an array of only the numbers that, when multiplied by 3,
  * are divisibile by 5
  */
-function tripleAndFilter(arr) {
+/* function tripleAndFilter(arr) {
   return arr
     .map(function(value) {
       return value * 3;
@@ -25,7 +27,18 @@ function tripleAndFilter(arr) {
     .filter(function(value) {
       return value % 5 === 0;
     });
+} */
+
+function tripleAndFilter(arr) {
+  return arr
+  .map(value => {
+    return value * 3
+  })
+  .filter(value => {
+    return value % 5 === 0;
+  });
 }
+
 /**
  * Refactor the following to use ES6 arrow syntax.
  * Make sure your refactored function is still called "doubleOddNumbers".
@@ -33,12 +46,22 @@ function tripleAndFilter(arr) {
  * @returns {array} an array of only the even numbers. Each value in the
  * new array of numbers is doubled
  */
-function doubleOddNumbers(arr) {
+/* function doubleOddNumbers(arr) {
   return arr
     .filter(function(val) {
       return val % 2 !== 0;
     })
     .map(function(val) {
+      return val * 2;
+    });
+} */
+
+function doubleOddNumbers(arr) {
+  return arr
+    .filter(val => {
+      return val % 2 !== 0;
+    })
+    .map(val => {
       return val * 2;
     });
 }
@@ -51,8 +74,8 @@ function doubleOddNumbers(arr) {
  */
 var sayNameLaterObj = {
   name: "Jamal",
-  sayLater: function() {
-    setTimeout(function() {
+  sayLater: () => {
+    setTimeout( () => {
       console.log(this.name);
     }, 1000);
   }

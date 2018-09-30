@@ -15,10 +15,10 @@
  */
 
 // What can we put in place of "var"?
-var messageBox = document.getElementById("message");
+let messageBox = document.getElementById("message");
 
 // What can we put in place of "var"?
-var guestNetworkStatus = {
+let guestNetworkStatus = {
   location: "Sunnyside Hotel",
   networkName: "Guest Network",
   uptime: 90,
@@ -28,9 +28,9 @@ var guestNetworkStatus = {
 // What can we put in place of "var"?
 for (var i = 0; i < 5; i++) {
   // What can we put in place of "function"?
-  setTimeout(function() {
+  setTimeout( () => {
     // Let's make this a constant, because we are not going to ever change it
-    var serverData = [
+    const serverData = [
       {
         networkName: "Guest Network",
         lastPinged: new Date(),

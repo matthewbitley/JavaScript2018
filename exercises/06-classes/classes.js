@@ -8,7 +8,7 @@
  * @method get return another function to display the counter variable
  *
  */
-function Counter(startValue) {
+/* function Counter(startValue) {
   var counter = startValue || 0;
   return {
     add: function(num) {
@@ -18,7 +18,22 @@ function Counter(startValue) {
       return counter;
     }
   };
+} */
+
+class Counter {
+  constructor(startValue) {
+    this.counter = startValue;
+  }
+  add = (num) => {counter += num;}
+  get = () => {return counter;}
 }
+
+/* class CounterMore extends Counter {
+  super();
+} */
+
+var beginCounter = new Counter(2);
+beginCounter.get();
 
 /**
  * Create Decrementor ES6 class which will extend the class counter
