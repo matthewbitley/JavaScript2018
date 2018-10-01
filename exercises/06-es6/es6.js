@@ -26,7 +26,7 @@ let guestNetworkStatus = {
 };
 
 // What can we put in place of "var"?
-for (var i = 0; i < 5; i++) {
+for (let i = 0; i < 5; i++) {
   // What can we put in place of "function"?
   setTimeout( () => {
     // Let's make this a constant, because we are not going to ever change it
@@ -48,25 +48,25 @@ for (var i = 0; i < 5; i++) {
       }
     ];
     // "Spread" this out so you are only passing in one argument
-    process(serverData[0], serverData[1], serverData[2]);
+    process(...serverData);
   }, i * 3000);
 }
 
 function process(guestNetwork, lobbyNetwork, staffNetwork) {
   // Replace the next two lines by destructuring an object instead
-  var lastPinged = guestNetwork.lastPinged;
-  var uptime = guestNetwork.uptime;
-
+  var {lastPinged, uptime} = guestNetwork;
   // Let's set the properties of guestNetworkStatus by shallow copying
   // one object onto another. What object method can we use to do this?
   // The first object copied will be guestNetworkStatus
   // The second object copied will be constructed with object shorthand
-  guestNetworkStatus.lastPinged = lastPinged;
-  guestNetworkStatus.uptime = uptime;
+  guestNetworkStatus = Object.assign(guestNetworkStatus,  {
+    lastPinged,
+    uptime
+  });
   console.log(guestNetworkStatus);
 
   // Does this need to use "var"?
-  var isBestNetwork =
+  let isBestNetwork =
     uptime > lobbyNetwork.uptime && uptime > staffNetwork.uptime;
 
   render(guestNetworkStatus, isBestNetwork);
@@ -74,11 +74,7 @@ function process(guestNetwork, lobbyNetwork, staffNetwork) {
 
 function render(guestNetworkStatus, betterThanStaffNetwork) {
   // Set message with string interpolation
-  var message =
-    guestNetworkStatus.networkName +
-    ": " +
-    guestNetworkStatus.uptime +
-    "% uptime";
+  let message = `${guestNetworkStatus.networkName}: ${guestNetworkStatus.uptime}%`;
   if (betterThanStaffNetwork)
     message += "\nThis is outperforming every other network.";
   console.log(message);
