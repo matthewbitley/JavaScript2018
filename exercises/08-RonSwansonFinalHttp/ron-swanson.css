@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+}
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.blockquote {
+  border-radius: 5px;
+  font-family: 'Kavivanar', cursive;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  padding: 30px;
+}
+.btn {
+  font-family: 'Syncopate', sans-serif;
+}
+.btn-outline-secondary {
+  background-color: #fff;
+}

@@ -9,12 +9,9 @@ function add(a, b) {
 function subtract(a, b) {
   return a - b;
 }
-<<<<<<< HEAD
 function multiply(a, b) {
   return a * b;
 }
-=======
->>>>>>> 6ea895904a829614ed1e525a11023455cbd61cb7
 
 /**
  * Write out the function multiply, which multiplies two numbers
@@ -45,10 +42,6 @@ function findAdults(people) {
 module.exports = {
   add,
   subtract,
-<<<<<<< HEAD
   multiply,
-=======
-  // Include multiply here
->>>>>>> 6ea895904a829614ed1e525a11023455cbd61cb7
   findAdults
 };
