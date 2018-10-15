@@ -24,9 +24,48 @@
  */
 
 // import the things you need here
+import React from "react";
+import "./RestaurantMenu.css";
+import items from "./RestaurantMenuItems.json";
 
 // create any additional React components here
 
-function RestaurantMenu() {}
+function RestaurantMenuItem(props) {
+  return (
+    <div key={props.i}>
+      <h2>{props.cat}</h2>
+      <div className="MenuItem">
+        <div className="MenuItem-Row">
+          <h3>{props.name}</h3>
+          <div>${props.price}</div>
+        </div>
+        <p>{props.desc}</p>
+      </div>
+    </div>
+  )
+}
+
+
+
+function RestaurantMenu() {
+  return(
+    <main className="Restaurant">
+    <h1>Grandezza Del Cibo</h1>
+    {
+      Object.values(items).map((item, i) => {
+      return (
+      <RestaurantMenuItem
+      cat={item.cat}
+      name={item.name}
+      desc={item.description}
+      price={item.price}
+      />
+      )
+    }
+    )}
+    </main>
+  )
+}
 
 // export the function "RestaurantMenu" here as the default
+export default RestaurantMenu;
