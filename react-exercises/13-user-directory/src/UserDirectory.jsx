@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./UserDirectory.css";
-import users from "./users";
+import axios from 'axios';
+//import users from "./users";
 
 /**
  * Using events and state with React, get the search bar to work. The search bar should
@@ -17,9 +18,47 @@ import users from "./users";
 
 class UserDirectory extends Component {
   state = {
-    users: users
+    users: null,
+    userInput: ""
   };
+
+  getUsers = () => {
+    this.setState({
+      loading: true
+    });
+    axios
+      .get(`https://randomuser.me/api?results=500&inc=name,email,picture`)
+      .then(response => {
+        this.setState({
+          users: response.data.results,
+          loading: false
+        });
+      })
+      .catch(error => {
+        console.log('U DUN GOOFED');
+        this.setState({loading: false});
+      });
+  };
+
+  search = userInput => {
+    const input = userInput.replace(" ", "");
+    this.setState({
+      users: this.state.users.filter(user => {
+        const name = user.name.first + user.name.last;
+        return name.match(input);
+      })
+    });
+  };
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    this.getUsers();
+  }
+  
   render() {
+    console.log(this.state)
+    console.log('render')
+    const {users} = this.state;
     return (
       <div className="UserDirectory">
         <div className="Search">
@@ -28,10 +67,11 @@ class UserDirectory extends Component {
             placeholder="Search..."
             aria-label="Search"
             className="search"
+            onChange={e => this.search(e.target.value)}
           />
         </div>
         <div className="UserDirectory-users">
-          {this.state.users.map((user, index) => {
+          {users && this.state.users.map((user, index) => {
             const key = "user-" + index;
             const name =
               user.name.first[0].toUpperCase() +
@@ -43,7 +83,7 @@ class UserDirectory extends Component {
               <div className="card" key={key}>
                 <div className="card-section media-object">
                   <div className="thumbnail">
-                    <img src={user.picture.medium} alt="" />
+                    <img src={user.picture.medium} alt={name} />
                   </div>
                   <div className="media-object-section align-self-middle">
                     <div>
@@ -61,5 +101,17 @@ class UserDirectory extends Component {
     );
   }
 }
+
+/**
+ * PART II - to be completed later in class
+ *
+ * Update the component to use AJAX and lifecycle hooks.
+ * You will need to install and import the Axios library. From the "react-exercises/13-user-directory" folder, run
+ * ```
+ * npm install --save axios
+ * ```
+ * You will be using the Random User API. Use this URL:
+ * https://randomuser.me/api?results=500&inc=name,email,picture
+ */
 
 export default UserDirectory;
