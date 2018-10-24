@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./UserDirectory.css";
-import axios from 'axios';
-//import users from "./users";
+import axios from "axios";
+
+const url = "https://randomuser.me/api?results=500&inc=name,email,picture";
 
 /**
  * PART I: To be completed at the beginning of class
@@ -20,47 +21,54 @@ import axios from 'axios';
 
 class UserDirectory extends Component {
   state = {
-    users: null,
-    userInput: ""
+    users: [],
+    isLoading: true,
+    hasError: false
   };
-
-  getUsers = () => {
-    this.setState({
-      loading: true
-    });
+  /**
+   * Storing all the users separately so that when, in the search, the back button is hit,
+   * it will render all the users again
+   * @memberof UserDirectory
+   */
+  allUsers = [];
+  getUsers() {
     axios
-      .get(`https://randomuser.me/api?results=500&inc=name,email,picture`)
+      .get(url)
       .then(response => {
-        this.setState({
-          users: response.data.results,
-          loading: false
-        });
+        if (
+          response.data &&
+          response.data.results &&
+          response.data.results.length > 0
+        ) {
+          console.log("here");
+          this.allUsers = response.data.results;
+          this.setState({
+            users: this.allUsers,
+            isLoading: false
+          });
+        } else throw new Error("Got a response, but no users in the response");
       })
       .catch(error => {
-        console.log('U DUN GOOFED');
-        this.setState({loading: false});
+        console.error(error);
+        this.setState({
+          isLoading: false,
+          hasError: true
+        });
       });
-  };
-
+  }
+  componentDidMount() {
+    this.getUsers();
+  }
   search = userInput => {
-    const input = userInput.replace(" ", "");
+    const input = userInput.replace(" ", "").toLowerCase();
     this.setState({
-      users: this.state.users.filter(user => {
+      users: this.allUsers.filter(user => {
         const name = user.name.first + user.name.last;
         return name.match(input);
       })
     });
   };
-
-  componentDidMount() {
-    console.log('componentDidMount');
-    this.getUsers();
-  }
-  
   render() {
-    console.log(this.state)
-    console.log('render')
-    const {users} = this.state;
     return (
       <div className="UserDirectory">
         <div className="Search">
@@ -73,7 +81,11 @@ class UserDirectory extends Component {
           />
         </div>
         <div className="UserDirectory-users">
-          {users && this.state.users.map((user, index) => {
+          {this.state.hasError ? (
+            <p>We are sorry, an error has occurred.</p>
+          ) : null}
+          {this.state.isLoading ? <p>Loading ...</p> : null}
+          {this.state.users.map((user, index) => {
             const key = "user-" + index;
             const name =
               user.name.first[0].toUpperCase() +
@@ -85,7 +97,7 @@ class UserDirectory extends Component {
               <div className="card" key={key}>
                 <div className="card-section media-object">
                   <div className="thumbnail">
-                    <img src={user.picture.medium} alt={name} />
+                    <img src={user.picture.medium} alt="" />
                   </div>
                   <div className="media-object-section align-self-middle">
                     <div>
@@ -98,6 +110,12 @@ class UserDirectory extends Component {
               </div>
             );
           })}
+          {Array.isArray(this.state.users) &&
+          this.state.users.length === 0 &&
+          !this.state.isLoading &&
+          !this.state.hasError ? (
+            <p>No results found.</p>
+          ) : null}
         </div>
       </div>
     );
