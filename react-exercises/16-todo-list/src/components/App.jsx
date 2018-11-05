@@ -11,15 +11,46 @@ import React, { Component } from "react";
 import ListItem from "./ListItem/ListItem";
 
 class App extends Component {
+
+  state = {
+    todos: [],
+    userInput: ''
+  }
+
+  setUserInput = userInput => {
+    this.setState({
+      userInput: userInput
+    })
+  }
+
+  delete = toDoIndex => {
+    this.setState({
+      todos: this.state.todos.filter((todo, index) => {
+        return index !== toDoIndex;
+      })
+    })
+  }
+
+  addItem = (e) => {
+    e.preventDefault()
+    const todos = this.state.todos;
+    this.setState({
+      todos: [...this.state.todos, this.state.userInput],
+      userInput: ''
+    })
+  }
+
   render() {
     return (
       <div className="container mt-4">
         <header className="App-header">
           <h1>Todo List</h1>
-          <form className="form-group">
+          <form onSubmit={(e) => this.addItem(e)} className="form-group">
             <div className="input-group mb-3">
               <input
                 type="text"
+                onChange={e => this.setUserInput(e.target.value)}
+                value={this.state.userInput}
                 className="form-control"
                 placeholder="Enter text"
                 aria-label="Enter text"
@@ -37,7 +68,19 @@ class App extends Component {
             </div>
           </form>
         </header>
-        <ul className="list-group">{/* Put ListItems in here */}</ul>
+        <ul className="list-group">
+        {this.state.todos.map((todo,index)=>{
+          const key = "List Item "  + index;
+          return (
+          <ListItem
+            delete={this.delete}
+            toDoIndex={index}
+            key={key}
+            children={this.state.userInput}
+          >{todo}</ListItem>
+            )
+            })}
+        </ul>
       </div>
     );
   }

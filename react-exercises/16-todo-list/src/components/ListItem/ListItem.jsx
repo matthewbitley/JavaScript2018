@@ -9,6 +9,9 @@ function ListItem(props) {
     <li className="list-group-item">
       {props.children}
       <button
+        onClick={() => {
+          props.delete(props.toDoIndex)
+          }}
         type="button"
         className="btn btn-link float-right"
         aria-label="Delete"
