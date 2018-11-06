@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import axios from "axios";
+>>>>>>> d47b24d52e14b203c1e3889d9bf3ae4c4ce10f89
 
 /**
  * https://api.darksky.net/forecast/6111b812232ce4bc2370f18ee3b64134/[latitude],[longitude]
@@ -18,6 +22,7 @@ import axios from 'axios';
 
 class App extends Component {
   state = {
+<<<<<<< HEAD
     weather: '',
     lat: '',
     long: ''
@@ -55,16 +60,63 @@ class App extends Component {
   }
 
 
+=======
+    location: "",
+    temperature: 0,
+    summary: "",
+    isLoading: true
+  };
+  getCoordinates = callback => {
+    return axios.get("http://dev.mydbc.co/demo/latlong.php").then(response => {
+      if (!response.data.lat || !response.data.lon)
+        throw new Error("No response from lat + long");
+      callback(response.data.lat, response.data.lon);
+      this.setState({ location: response.data.location });
+    });
+  };
+  getWeather = (lat, long) => {
+    return axios
+      .get(`http://dev.mydbc.co/demo/api.php?lat=${lat}&long=${long}`)
+      .then(response => {
+        const { temperature, summary } = response.data.currently;
+        console.log(response.data);
+        this.setState({
+          temperature,
+          summary,
+          isLoading: false
+        });
+      });
+  };
+  componentDidMount() {
+    this.getCoordinates(this.getWeather);
+  }
+>>>>>>> d47b24d52e14b203c1e3889d9bf3ae4c4ce10f89
   render() {
     const {weather} = this.state;
     return (
       <div className="card">
+<<<<<<< HEAD
         <div className="card-section">
           <div className="container">
             <h3>{weather.timezone}</h3>
             <p>{this.state.summary}</p>
+=======
+        {this.state.isLoading ? (
+          <p>Loading</p>
+        ) : (
+          <div className="card-section">
+            <div className="container">
+              <h3>{this.state.location}</h3>
+              <p>
+                {this.state.summary}
+                <br />
+                Temperature: {this.state.temperature}
+                &deg;F
+              </p>
+            </div>
+>>>>>>> d47b24d52e14b203c1e3889d9bf3ae4c4ce10f89
           </div>
-        </div>
+        )}
       </div>
     );
   }

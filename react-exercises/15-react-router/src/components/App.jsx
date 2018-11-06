@@ -26,6 +26,7 @@ function App() {
    */
   return (
     <div className="container">
+<<<<<<< HEAD
     <Switch>
       <Route exact path="/" component={CustomeCategories} />
       <Route exact path="/customes" component={CustomeCategories} />
@@ -34,6 +35,14 @@ function App() {
       {/* Both components should NOT display on the page at once. 
       <CustomeCategories />
       <Customes />*/}
+=======
+      {/* Both components should NOT display on the page at once. */}
+      <Switch>
+        <Route exact path="/" component={CustomeCategories} />
+        <Route exact path="/customes" component={CustomeCategories} />
+        <Route path="/customes/:category" component={Customes} />
+      </Switch>
+>>>>>>> d47b24d52e14b203c1e3889d9bf3ae4c4ce10f89
     </div>
   );
 }
