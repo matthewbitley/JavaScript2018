@@ -28,4 +28,28 @@ describe("./src/reducer.js", () => {
    *   });
    * });
    */
+  it("will get a member ID", () => {
+    const state = {
+      memberID: 1
+    };
+    const action = {
+      type: types.GET_MEMBER_ID
+    };
+    const newState = reducer(state, action);
+    expect(newState).to.deep.equal({
+      memberID: 1
+    });
+  });
+  it("will get a member PIN", () => {
+      const state = {
+        memberPIN: 1
+      };
+      const action = {
+        type: types.GET_MEMBER_PIN
+      };
+      const newState = reducer(state, action);
+      expect(newState).to.deep.equal({
+        memberPIN: 1
+      });
+  });
 });

@@ -17,13 +17,33 @@ import * as types from "src/constants/actionTypes";
 
 export function getMemberID() {
     return {
-      type: types.MEMBER_ID
+      type: types.GET_MEMBER_ID
+    };
+}
+
+export function getMemberPIN() {
+    return {
+      type: types.GET_MEMBER_PIN
     };
 }
 
 export function login() {
     return {
       type: types.LOGIN
+    };
+}
+
+export function pickCategory(categoryIndex) {
+    return {
+      type: types.PICK_CATEGORY,
+      categoryIndex
+    };
+}
+
+export function nextCategory(categoryIndex) {
+    return {
+      type: types.NEXT_CATEGORY,
+      categoryIndex
     };
 }
 
