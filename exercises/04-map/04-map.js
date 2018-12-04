@@ -22,7 +22,7 @@ console.log(map(arr, function(item, index, array){
 }));
 
 /**
- * Multiplies each vvalue in an array by two
+ * Multiplies each value in an array by two
  * @param {array} arr
  * @returns {array} new array, with each value doubled
  */

@@ -13,10 +13,24 @@ const send = (url, data = null, method = "POST") => {
   }).then(response => response.data);
 };
 
+export const signinRequest = (memberId, pinNumber) => {
+  return send(`${api}/signin`, { memberId, pinNumber }).then(response => {
+    return response;
+  });
+};
+
 export const fetchAllNomineesRequest = () => {
   return send(`${api}/nominees`, null, "GET");
 };
 
 export const voteRequest = (categoryId, nomineeIndex) => {
   return send(`${api}/vote`, { categoryId, nomineeIndex });
+};
+
+/**
+ * Create a function that will send an AJAX request to "http://localhost:7001/complete"
+ */
+
+export const completeRequest = (categoryId, nomineeIndex) => {
+  return send(`${api}/complete`, { categoryId, nomineeIndex });
 };
