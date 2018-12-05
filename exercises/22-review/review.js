@@ -7,7 +7,13 @@
  *   onlyOddNumbersValues([1,2,3]) // [1,3]
  *   onlyOddNumbersValues([5,1,2,3,10]) // [5,1,3]
  */
-function onlyOddNumbersValues(arr) {}
+function onlyOddNumbersValues(arr) {
+  for (var i = 0; i < arr.length; i++) {
+  if ((arr[i] % 2) != 1) {
+    return arr;
+  }
+}
+}
 
 /**
  * A function that accepts an array and returns the largest number inside the array
@@ -16,7 +22,11 @@ function onlyOddNumbersValues(arr) {}
  * @return {integar}
  */
 
-function largestNumberInArray(array) {}
+function largestNumberInArray(array) {
+  return array.map(function(subArray) {
+    return Math.max.apply(null, subArray);
+  });
+}
 
 /**
  * Multiplies each value in an array by two
@@ -33,7 +43,29 @@ function doubleValues(arr) {}
  * maxChar("aaaabc"); // a
  */
 
-function maxChars(string) {}
+function maxChars(string) {
+  var obj = {};
+  var array = string.split("");
+
+  for (var i = 0, j = string.length; i < j; i++) {
+    var letter = array[i];
+
+    if (obj[letter]) {
+      obj[letter] = obj[letter] + 1;
+    } else obj[letter] = 1;
+  }
+
+  var maxLetter = "";
+  var maxOccurences = 0;
+  for (var letter in obj) {
+    if (obj[letter] > maxOccurences) {
+      maxOccurences = obj[letter];
+      maxLetter = letter;
+    }
+  }
+
+  return maxLetter;
+}
 
 /**
  * Given an array of numbers, return the sum
@@ -43,7 +75,10 @@ function maxChars(string) {}
  *  addItems([1,5,6]) // 12
  *  addItems([1,-2,-3]) // -4
  */
-function addItems(arr) {}
+function addItems(arr) {
+  var sum = arr.reduce((a, b) => a + b, 0);
+  console.log(sum);
+}
 
 module.exports = {
   maxChars,
