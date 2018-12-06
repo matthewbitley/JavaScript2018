@@ -39,11 +39,9 @@ export const vote = (categoryId, nomineeIndex) => {
  * Using redux promise only, complete the function below.
  * You can look at "src/ations/signinActions.js" as an example
  */
-export const completeVoting = (categoryId, nomineeIndex) => {
-  return dispatch => {
-    dispatch(ajaxLoading());
-    completeRequest(categoryId, nomineeIndex)
-      .then(() => dispatch(ajaxSuccess(categoryId, nomineeIndex)))
-      .catch(() => dispatch(ajaxFailure()));
+export const completeVoting = () => {
+  return {
+    type: types.COMPLETE_VOTING,
+    payload: completeRequest()
   };
 };

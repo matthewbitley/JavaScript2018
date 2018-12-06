@@ -31,6 +31,6 @@ export const voteRequest = (categoryId, nomineeIndex) => {
  * Create a function that will send an AJAX request to "http://localhost:7001/complete"
  */
 
-export const completeRequest = (categoryId, nomineeIndex) => {
-  return send(`${api}/complete`, { categoryId, nomineeIndex });
+export const completeRequest = () => {
+  return send(`${api}/complete`);
 };
